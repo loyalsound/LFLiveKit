@@ -691,6 +691,25 @@
 		BE388E8E1F83328D000499F8 /* RKMultiAudioMix.m in Sources */ = {isa = PBXBuildFile; fileRef = BE388E7F1F821059000499F8 /* RKMultiAudioMix.m */; };
 		BE388E8F1F833290000499F8 /* RKAudioMixSource.m in Sources */ = {isa = PBXBuildFile; fileRef = BE388E8B1F821360000499F8 /* RKAudioMixSource.m */; };
 		BE4059691F95CF0E00BF9962 /* GPUImage.h in Headers */ = {isa = PBXBuildFile; fileRef = 84358E891DD1FEB500811FC7 /* GPUImage.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BE483CA41FD559CC000F3014 /* LFLiveKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 84D8B5A51D768B6E00752B56 /* LFLiveKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BE483CB11FD7D086000F3014 /* RKSampleBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = BE483CAF1FD7D086000F3014 /* RKSampleBuffer.h */; };
+		BE483CB21FD7D086000F3014 /* RKSampleBuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = BE483CB01FD7D086000F3014 /* RKSampleBuffer.m */; };
+		BE483CB31FD7D0FA000F3014 /* RKSampleBuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = BE483CB01FD7D086000F3014 /* RKSampleBuffer.m */; };
+		BE483CB61FD7DAF3000F3014 /* RKLinkedList.h in Headers */ = {isa = PBXBuildFile; fileRef = BE483CB41FD7DAF3000F3014 /* RKLinkedList.h */; };
+		BE483CB71FD7DAF4000F3014 /* RKLinkedList.h in Headers */ = {isa = PBXBuildFile; fileRef = BE483CB41FD7DAF3000F3014 /* RKLinkedList.h */; };
+		BE483CB81FD7DAF4000F3014 /* RKLinkedList.m in Sources */ = {isa = PBXBuildFile; fileRef = BE483CB51FD7DAF3000F3014 /* RKLinkedList.m */; };
+		BE483CB91FD7DAF4000F3014 /* RKLinkedList.m in Sources */ = {isa = PBXBuildFile; fileRef = BE483CB51FD7DAF3000F3014 /* RKLinkedList.m */; };
+		BE4867AE1FD6E9A90054BE0A /* RKReplayKitCapture.h in Headers */ = {isa = PBXBuildFile; fileRef = BE4867AC1FD6E9A90054BE0A /* RKReplayKitCapture.h */; };
+		BE4867AF1FD6E9A90054BE0A /* RKReplayKitCapture.h in Headers */ = {isa = PBXBuildFile; fileRef = BE4867AC1FD6E9A90054BE0A /* RKReplayKitCapture.h */; };
+		BE4867B01FD6E9A90054BE0A /* RKReplayKitCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = BE4867AD1FD6E9A90054BE0A /* RKReplayKitCapture.m */; };
+		BE4867B11FD6E9A90054BE0A /* RKReplayKitCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = BE4867AD1FD6E9A90054BE0A /* RKReplayKitCapture.m */; };
+		BEA7E8F21FDFDBE600E5AE1F /* RKReplayKitGLContext.h in Headers */ = {isa = PBXBuildFile; fileRef = BEA7E8F01FDFDBE600E5AE1F /* RKReplayKitGLContext.h */; };
+		BEA7E8F31FDFDBE600E5AE1F /* RKReplayKitGLContext.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA7E8F11FDFDBE600E5AE1F /* RKReplayKitGLContext.m */; };
+		BEA7E8F41FDFE12100E5AE1F /* RKReplayKitGLContext.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA7E8F11FDFDBE600E5AE1F /* RKReplayKitGLContext.m */; };
+		BEA7E8F81FDFE40200E5AE1F /* RKGLProgram.h in Headers */ = {isa = PBXBuildFile; fileRef = BEA7E8F61FDFE40200E5AE1F /* RKGLProgram.h */; };
+		BEA7E8F91FDFE40200E5AE1F /* RKGLProgram.h in Headers */ = {isa = PBXBuildFile; fileRef = BEA7E8F61FDFE40200E5AE1F /* RKGLProgram.h */; };
+		BEA7E8FA1FDFE40200E5AE1F /* RKGLProgram.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA7E8F71FDFE40200E5AE1F /* RKGLProgram.m */; };
+		BEA7E8FB1FDFE40200E5AE1F /* RKGLProgram.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA7E8F71FDFE40200E5AE1F /* RKGLProgram.m */; };
 		C1296A021E5072C400C992C7 /* RKGPUImageColorMapFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = C1296A001E5072C400C992C7 /* RKGPUImageColorMapFilter.h */; };
 		C1296A031E5072C400C992C7 /* RKGPUImageColorMapFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = C1296A011E5072C400C992C7 /* RKGPUImageColorMapFilter.m */; };
 		C1296A041E50735D00C992C7 /* RKGPUImageColorMapFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = C1296A011E5072C400C992C7 /* RKGPUImageColorMapFilter.m */; };
@@ -1357,6 +1376,16 @@
 		BE388E7F1F821059000499F8 /* RKMultiAudioMix.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RKMultiAudioMix.m; sourceTree = "<group>"; };
 		BE388E8A1F821360000499F8 /* RKAudioMixSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RKAudioMixSource.h; sourceTree = "<group>"; };
 		BE388E8B1F821360000499F8 /* RKAudioMixSource.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RKAudioMixSource.m; sourceTree = "<group>"; };
+		BE483CAF1FD7D086000F3014 /* RKSampleBuffer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RKSampleBuffer.h; sourceTree = "<group>"; };
+		BE483CB01FD7D086000F3014 /* RKSampleBuffer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RKSampleBuffer.m; sourceTree = "<group>"; };
+		BE483CB41FD7DAF3000F3014 /* RKLinkedList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RKLinkedList.h; sourceTree = "<group>"; };
+		BE483CB51FD7DAF3000F3014 /* RKLinkedList.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RKLinkedList.m; sourceTree = "<group>"; };
+		BE4867AC1FD6E9A90054BE0A /* RKReplayKitCapture.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RKReplayKitCapture.h; sourceTree = "<group>"; };
+		BE4867AD1FD6E9A90054BE0A /* RKReplayKitCapture.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RKReplayKitCapture.m; sourceTree = "<group>"; };
+		BEA7E8F01FDFDBE600E5AE1F /* RKReplayKitGLContext.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RKReplayKitGLContext.h; sourceTree = "<group>"; };
+		BEA7E8F11FDFDBE600E5AE1F /* RKReplayKitGLContext.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RKReplayKitGLContext.m; sourceTree = "<group>"; };
+		BEA7E8F61FDFE40200E5AE1F /* RKGLProgram.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RKGLProgram.h; sourceTree = "<group>"; };
+		BEA7E8F71FDFE40200E5AE1F /* RKGLProgram.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RKGLProgram.m; sourceTree = "<group>"; };
 		C1296A001E5072C400C992C7 /* RKGPUImageColorMapFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RKGPUImageColorMapFilter.h; sourceTree = "<group>"; };
 		C1296A011E5072C400C992C7 /* RKGPUImageColorMapFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RKGPUImageColorMapFilter.m; sourceTree = "<group>"; };
 		C1296A061E50C99200C992C7 /* RKGUPImageSoftLightFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RKGUPImageSoftLightFilter.h; sourceTree = "<group>"; };
@@ -1548,6 +1577,7 @@
 		84358E851DD1FEB500811FC7 /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				BEA7E8F51FDFE3F100E5AE1F /* RKGLKit */,
 				BE35EB881F72736500B615DF /* ping */,
 				84358E861DD1FEB500811FC7 /* GPUImage */,
 				84358FE31DD1FEB600811FC7 /* pili-librtmp */,
@@ -2011,6 +2041,8 @@
 				84D8B5861D768B6E00752B56 /* LFAudioCapture.m */,
 				84D8B5871D768B6E00752B56 /* LFVideoCapture.h */,
 				84D8B5881D768B6E00752B56 /* LFVideoCapture.m */,
+				BE4867AC1FD6E9A90054BE0A /* RKReplayKitCapture.h */,
+				BE4867AD1FD6E9A90054BE0A /* RKReplayKitCapture.m */,
 			);
 			path = capture;
 			sourceTree = "<group>";
@@ -2091,6 +2123,10 @@
 				84D8B5B21D768B6E00752B56 /* LFVideoFrame.m */,
 				BE35EB771F5D591400B615DF /* RKDataLinkedList.h */,
 				BE35EB781F5D591400B615DF /* RKDataLinkedList.m */,
+				BE483CB41FD7DAF3000F3014 /* RKLinkedList.h */,
+				BE483CB51FD7DAF3000F3014 /* RKLinkedList.m */,
+				BE483CAF1FD7D086000F3014 /* RKSampleBuffer.h */,
+				BE483CB01FD7D086000F3014 /* RKSampleBuffer.m */,
 				BE35EB9B1F73853100B615DF /* RKStreamLog.h */,
 				BE35EB9C1F73853100B615DF /* RKStreamLog.m */,
 			);
@@ -2150,6 +2186,17 @@
 				BE35EB8C1F72736600B615DF /* STSimplePing.m */,
 			);
 			path = ping;
+			sourceTree = "<group>";
+		};
+		BEA7E8F51FDFE3F100E5AE1F /* RKGLKit */ = {
+			isa = PBXGroup;
+			children = (
+				BEA7E8F01FDFDBE600E5AE1F /* RKReplayKitGLContext.h */,
+				BEA7E8F11FDFDBE600E5AE1F /* RKReplayKitGLContext.m */,
+				BEA7E8F61FDFE40200E5AE1F /* RKGLProgram.h */,
+				BEA7E8F71FDFE40200E5AE1F /* RKGLProgram.m */,
+			);
+			path = RKGLKit;
 			sourceTree = "<group>";
 		};
 		C16E7CEC1E5341C20067DE28 /* Color Filters */ = {
@@ -2330,6 +2377,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE483CA41FD559CC000F3014 /* LFLiveKit.h in Headers */,
 				8495F6861DB8F1EE00542124 /* LFLiveDebug.h in Headers */,
 				BE35EB921F72736600B615DF /* STSimplePing.h in Headers */,
 				C1296A091E50C99200C992C7 /* RKGUPImageSoftLightFilter.h in Headers */,
@@ -2357,6 +2405,8 @@
 				C16E7D321E53499C0067DE28 /* RKGPUImageDreamFilter.h in Headers */,
 				C1296A051E50736000C992C7 /* RKGPUImageColorMapFilter.h in Headers */,
 				C16E7D741E53F5950067DE28 /* RKGPUImagePrairieFilter.h in Headers */,
+				BE483CB71FD7DAF4000F3014 /* RKLinkedList.h in Headers */,
+				BEA7E8F91FDFE40200E5AE1F /* RKGLProgram.h in Headers */,
 				8495F6751DB8F1EE00542124 /* LFAVEncoder.h in Headers */,
 				C16E7D141E5348740067DE28 /* RKGPUImageSunshineFilter.h in Headers */,
 				8495F6761DB8F1EE00542124 /* LFMP4Atom.h in Headers */,
@@ -2392,6 +2442,7 @@
 				8495F6811DB8F1EE00542124 /* LFGPUImageEmptyFilter.h in Headers */,
 				8495F6891DB8F1EE00542124 /* LFStreamingBuffer.h in Headers */,
 				8495F68A1DB8F1EE00542124 /* LFStreamRTMPSocket.h in Headers */,
+				BE4867AF1FD6E9A90054BE0A /* RKReplayKitCapture.h in Headers */,
 				8495F68B1DB8F1EE00542124 /* LFStreamSocket.h in Headers */,
 				8495F68C1DB8F1EE00542124 /* NSMutableArray+LFAdd.h in Headers */,
 				C1296A0F1E50D37100C992C7 /* RKGPUImageOverlayFilter.h in Headers */,
@@ -2488,6 +2539,7 @@
 				C16E7D851E53F6200067DE28 /* RKGPUImageMemoirFilter.h in Headers */,
 				843590BD1DD1FEB600811FC7 /* GPUImageNonMaximumSuppressionFilter.h in Headers */,
 				843590B31DD1FEB600811FC7 /* GPUImageMotionDetector.h in Headers */,
+				BE4867AE1FD6E9A90054BE0A /* RKReplayKitCapture.h in Headers */,
 				843590C91DD1FEB600811FC7 /* GPUImageParallelCoordinateLineTransformFilter.h in Headers */,
 				843590ED1DD1FEB600811FC7 /* GPUImageSaturationFilter.h in Headers */,
 				843590491DD1FEB600811FC7 /* GPUImageExclusionBlendFilter.h in Headers */,
@@ -2498,6 +2550,7 @@
 				843590071DD1FEB600811FC7 /* GPUImageBilateralFilter.h in Headers */,
 				843591521DD1FEB600811FC7 /* dhgroups.h in Headers */,
 				843590CD1DD1FEB600811FC7 /* GPUImagePinchDistortionFilter.h in Headers */,
+				BEA7E8F81FDFE40200E5AE1F /* RKGLProgram.h in Headers */,
 				843591311DD1FEB600811FC7 /* GPUImageUIElement.h in Headers */,
 				843591151DD1FEB600811FC7 /* GPUImageTextureInput.h in Headers */,
 				843590E11DD1FEB600811FC7 /* GPUImageRGBClosingFilter.h in Headers */,
@@ -2630,13 +2683,16 @@
 				843590051DD1FEB600811FC7 /* GPUImageAverageLuminanceThresholdFilter.h in Headers */,
 				843590511DD1FEB600811FC7 /* GPUImageFilter.h in Headers */,
 				843590691DD1FEB600811FC7 /* GPUImageHalftoneFilter.h in Headers */,
+				BEA7E8F21FDFDBE600E5AE1F /* RKReplayKitGLContext.h in Headers */,
 				84358FFB1DD1FEB600811FC7 /* GPUImageAdaptiveThresholdFilter.h in Headers */,
 				843590291DD1FEB600811FC7 /* GPUImageColorPackingFilter.h in Headers */,
 				C16E7D3D1E534A120067DE28 /* RKGPUImageMellowFilter.h in Headers */,
 				843590131DD1FEB600811FC7 /* GPUImageCGAColorspaceFilter.h in Headers */,
 				84D8B5E41D768B6E00752B56 /* LFStreamingBuffer.h in Headers */,
 				8435905F1DD1FEB600811FC7 /* GPUImageGaussianBlurFilter.h in Headers */,
+				BE483CB61FD7DAF3000F3014 /* RKLinkedList.h in Headers */,
 				8435910D1DD1FEB600811FC7 /* GPUImageStillCamera.h in Headers */,
+				BE483CB11FD7D086000F3014 /* RKSampleBuffer.h in Headers */,
 				8435912F1DD1FEB600811FC7 /* GPUImageTwoPassTextureSamplingFilter.h in Headers */,
 				8435904B1DD1FEB600811FC7 /* GPUImageExposureFilter.h in Headers */,
 				8435902F1DD1FEB600811FC7 /* GPUImageContrastFilter.h in Headers */,
@@ -3008,6 +3064,7 @@
 				843591BE1DD20A7F00811FC7 /* GPUImageLocalBinaryPatternFilter.m in Sources */,
 				843591BF1DD20A7F00811FC7 /* GPUImageLookupFilter.m in Sources */,
 				C16E7DAC1E53F7460067DE28 /* RKGPUImageColorFilter.m in Sources */,
+				BE4867B11FD6E9A90054BE0A /* RKReplayKitCapture.m in Sources */,
 				843591C01DD20A7F00811FC7 /* GPUImageLowPassFilter.m in Sources */,
 				C16E7D1C1E5348A40067DE28 /* RKGPUImageSunsetFilter.m in Sources */,
 				843591C11DD20A7F00811FC7 /* GPUImageLuminanceRangeFilter.m in Sources */,
@@ -3019,12 +3076,14 @@
 				843591C61DD20A7F00811FC7 /* GPUImageMedianFilter.m in Sources */,
 				843591C71DD20A7F00811FC7 /* GPUImageMissEtikateFilter.m in Sources */,
 				843591C81DD20A7F00811FC7 /* GPUImageMonochromeFilter.m in Sources */,
+				BEA7E8FB1FDFE40200E5AE1F /* RKGLProgram.m in Sources */,
 				843591C91DD20A7F00811FC7 /* GPUImageMosaicFilter.m in Sources */,
 				843591CA1DD20A7F00811FC7 /* GPUImageMotionBlurFilter.m in Sources */,
 				843591CB1DD20A7F00811FC7 /* GPUImageMotionDetector.m in Sources */,
 				843591CC1DD20A7F00811FC7 /* GPUImageMovie.m in Sources */,
 				843591CD1DD20A7F00811FC7 /* GPUImageMovieComposition.m in Sources */,
 				843591CE1DD20A7F00811FC7 /* GPUImageMultiplyBlendFilter.m in Sources */,
+				BE483CB31FD7D0FA000F3014 /* RKSampleBuffer.m in Sources */,
 				843591CF1DD20A7F00811FC7 /* GPUImageNobleCornerDetectionFilter.m in Sources */,
 				843591D01DD20A7F00811FC7 /* GPUImageNonMaximumSuppressionFilter.m in Sources */,
 				843591D11DD20A7F00811FC7 /* GPUImageNormalBlendFilter.m in Sources */,
@@ -3120,6 +3179,7 @@
 				C16E7D401E534A120067DE28 /* RKGPUImageMellowFilter.m in Sources */,
 				8495F6931DB8F27000542124 /* LFHardwareAudioEncoder.m in Sources */,
 				8495F6941DB8F27000542124 /* LFHardwareVideoEncoder.m in Sources */,
+				BEA7E8F41FDFE12100E5AE1F /* RKReplayKitGLContext.m in Sources */,
 				C16E7D581E534B1C0067DE28 /* RKGPUImageCalmFilter.m in Sources */,
 				8495F6951DB8F27000542124 /* LFLiveAudioConfiguration.m in Sources */,
 				8495F6961DB8F27000542124 /* LFLiveVideoConfiguration.m in Sources */,
@@ -3135,6 +3195,7 @@
 				8495F69E1DB8F27000542124 /* LFVideoFrame.m in Sources */,
 				C16E7D0A1E53480C0067DE28 /* RKGPUImageRoseFilter.m in Sources */,
 				8495F69F1DB8F27000542124 /* LFStreamingBuffer.m in Sources */,
+				BE483CB91FD7DAF4000F3014 /* RKLinkedList.m in Sources */,
 				8495F6A01DB8F27000542124 /* LFStreamRtmpSocket.m in Sources */,
 				8495F6A11DB8F27000542124 /* NSMutableArray+LFAdd.m in Sources */,
 			);
@@ -3257,6 +3318,7 @@
 				84D8B5D91D768B6E00752B56 /* LFLiveSession.m in Sources */,
 				843590D01DD1FEB600811FC7 /* GPUImagePixellateFilter.m in Sources */,
 				843590C41DD1FEB600811FC7 /* GPUImageOpeningFilter.m in Sources */,
+				BE4867B01FD6E9A90054BE0A /* RKReplayKitCapture.m in Sources */,
 				C16E7DAB1E53F7460067DE28 /* RKGPUImageColorFilter.m in Sources */,
 				843591081DD1FEB600811FC7 /* GPUImageSolidColorGenerator.m in Sources */,
 				C16E7D1B1E5348A40067DE28 /* RKGPUImageSunsetFilter.m in Sources */,
@@ -3268,12 +3330,14 @@
 				843590A41DD1FEB600811FC7 /* GPUImageLuminosity.m in Sources */,
 				84358FFC1DD1FEB600811FC7 /* GPUImageAdaptiveThresholdFilter.m in Sources */,
 				843590661DD1FEB600811FC7 /* GPUImageGlassSphereFilter.m in Sources */,
+				BEA7E8FA1FDFE40200E5AE1F /* RKGLProgram.m in Sources */,
 				843591361DD1FEB600811FC7 /* GPUImageVideoCamera.m in Sources */,
 				843590581DD1FEB600811FC7 /* GPUImageFourInputFilter.m in Sources */,
 				8435912C1DD1FEB600811FC7 /* GPUImageTwoInputFilter.m in Sources */,
 				84D8B5E71D768B6E00752B56 /* LFStreamRtmpSocket.m in Sources */,
 				843590441DD1FEB600811FC7 /* GPUImageDivideBlendFilter.m in Sources */,
 				843590FA1DD1FEB600811FC7 /* GPUImageSketchFilter.m in Sources */,
+				BE483CB21FD7D086000F3014 /* RKSampleBuffer.m in Sources */,
 				843591221DD1FEB600811FC7 /* GPUImageTiltShiftFilter.m in Sources */,
 				843590EA1DD1FEB600811FC7 /* GPUImageRGBOpeningFilter.m in Sources */,
 				843590E21DD1FEB600811FC7 /* GPUImageRGBClosingFilter.m in Sources */,
@@ -3369,6 +3433,7 @@
 				C16E7D3F1E534A120067DE28 /* RKGPUImageMellowFilter.m in Sources */,
 				8435914B1DD1FEB600811FC7 /* GPUImagePicture.m in Sources */,
 				843590861DD1FEB600811FC7 /* GPUImageiOSBlurFilter.m in Sources */,
+				BEA7E8F31FDFDBE600E5AE1F /* RKReplayKitGLContext.m in Sources */,
 				BE388E811F821059000499F8 /* RKMultiAudioMix.m in Sources */,
 				C16E7D571E534B1C0067DE28 /* RKGPUImageCalmFilter.m in Sources */,
 				843590E41DD1FEB600811FC7 /* GPUImageRGBDilationFilter.m in Sources */,
@@ -3384,6 +3449,7 @@
 				843590F01DD1FEB600811FC7 /* GPUImageScreenBlendFilter.m in Sources */,
 				C16E7D091E53480C0067DE28 /* RKGPUImageRoseFilter.m in Sources */,
 				8435902E1DD1FEB600811FC7 /* GPUImageColourFASTSamplingOperation.m in Sources */,
+				BE483CB81FD7DAF4000F3014 /* RKLinkedList.m in Sources */,
 				843590B01DD1FEB600811FC7 /* GPUImageMosaicFilter.m in Sources */,
 				843590281DD1FEB600811FC7 /* GPUImageColorMatrixFilter.m in Sources */,
 			);
@@ -3447,7 +3513,7 @@
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = LFLiveKitFramework/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = mh_dylib;
 				OTHER_LDFLAGS = "-ObjC";
@@ -3472,7 +3538,7 @@
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = LFLiveKitFramework/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = mh_dylib;
 				OTHER_LDFLAGS = "-ObjC";
@@ -3536,7 +3602,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -3578,7 +3644,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -3601,7 +3667,7 @@
 				);
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				MACH_O_TYPE = mh_dylib;
@@ -3625,7 +3691,7 @@
 				);
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				MACH_O_TYPE = mh_dylib;

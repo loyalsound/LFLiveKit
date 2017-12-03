@@ -128,6 +128,11 @@
     }
 }
 
+- (NSData *)popData {
+    _mixingDataIndex = 0;
+    return [_dataList popHead];
+}
+
 - (BOOL)isEmpty {
     return !_dataList.head;
 }
@@ -142,6 +147,19 @@
     }
     const char *sideBytes = _dataList.head.bytes;
     short s = (short)(((sideBytes[_mixingDataIndex + 1] & 0xFF) << 8) | (sideBytes[_mixingDataIndex] & 0xFF));
+    _mixingDataIndex += 2;
+    if (_mixingDataIndex >= _dataList.head.length) {
+        [_dataList popHead];
+        _mixingDataIndex = 0;
+    }
+    return s;
+}
+
+- (SInt16)nextFrame {
+    if (!_dataList.head) {
+        return 0;
+    }
+    SInt16 s = *((SInt16*)_dataList.head.bytes);
     _mixingDataIndex += 2;
     if (_mixingDataIndex >= _dataList.head.length) {
         [_dataList popHead];

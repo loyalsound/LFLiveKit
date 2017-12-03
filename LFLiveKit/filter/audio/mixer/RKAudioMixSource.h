@@ -38,6 +38,10 @@
 
 - (void)pushData:(nonnull NSData *)data;
 
+- (nullable NSData *)popData;
+
+- (SInt16)nextFrame;
+
 @end
 
 

@@ -26,6 +26,11 @@ typedef NS_ENUM(NSInteger,LFLiveCaptureType) {
     LFLiveMixAudio,             //< mix input audio
 };
 
+typedef NS_ENUM(NSUInteger, RKReplayKitSampleType) {
+    RKReplayKitSampleTypeVideo,
+    RKReplayKitSampleTypeAppAudio,
+    RKReplayKitSampleTypeMicAudio
+};
 
 ///< 用来控制采集类型（可以内部采集也可以外部传入等各种组合，支持单音频与单视频,外部输入适用于录屏，无人机等外设介入）
 typedef NS_ENUM(NSInteger,LFLiveCaptureTypeMask) {
@@ -148,6 +153,8 @@ typedef NS_ENUM(NSUInteger, LFAudioMixVolume) {
 /** The mirrorOuput control mirror of output is on or off */
 @property (nonatomic, assign) BOOL mirrorOutput;
 
+@property (nonatomic, readonly) BOOL isReplayKitBroadcast;
+
 // 17 log
 @property (nonatomic, nullable) NSString *liveId;
 @property (nonatomic, nullable) NSString *provider;
@@ -177,6 +184,8 @@ typedef NS_ENUM(NSUInteger, LFAudioMixVolume) {
  */
 - (nullable instancetype)initWithAudioConfiguration:(nullable LFLiveAudioConfiguration *)audioConfiguration videoConfiguration:(nullable LFLiveVideoConfiguration *)videoConfiguration captureType:(LFLiveCaptureTypeMask)captureType NS_DESIGNATED_INITIALIZER;
 
+- (nullable instancetype)initForReplayKitBroadcast;
+
 /** The start stream .*/
 - (void)startLive:(nonnull LFLiveStreamInfo *)streamInfo;
 
@@ -188,6 +197,8 @@ typedef NS_ENUM(NSUInteger, LFAudioMixVolume) {
 
 /** support outer input pcm audio(set LFLiveCaptureTypeMask) .*/
 - (void)pushAudio:(nullable NSData*)audioData;
+
+- (void)pushReplayKitSample:(nonnull CMSampleBufferRef)sampleBuffer type:(RKReplayKitSampleType)type;
 
 /** Switch to previous color filter. */
 - (void)previousColorFilter;

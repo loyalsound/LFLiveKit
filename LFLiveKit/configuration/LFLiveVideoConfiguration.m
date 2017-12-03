@@ -142,6 +142,21 @@
     
 }
 
++ (instancetype)defaultConfigurationFromSampleBuffer:(CMSampleBufferRef)sampleBuffer {
+    CVImageBufferRef imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer);
+    CGSize size = CVImageBufferGetDisplaySize(imageBuffer);
+    LFLiveVideoConfiguration *configuration = [LFLiveVideoConfiguration new];
+    configuration.videoFrameRate = 30;
+    configuration.videoMaxFrameRate = 30;
+    configuration.videoMinFrameRate = 15;
+    configuration.videoBitRate = 1200 * 1000;
+    configuration.videoMaxBitRate = 1440 * 1000;
+    configuration.videoMinBitRate = 500 * 1000;
+    configuration.videoSize = size;
+    configuration.videoMaxKeyframeInterval = configuration.videoFrameRate * 2;
+    return configuration;
+}
+
 #pragma mark -- Setter Getter
 - (NSString *)avSessionPreset {
     NSString *avSessionPreset = nil;
