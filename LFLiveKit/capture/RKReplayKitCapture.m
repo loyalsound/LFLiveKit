@@ -9,18 +9,9 @@
 #import "RKReplayKitCapture.h"
 #import "RKAudioMixSource.h"
 #import "RKReplayKitGLContext.h"
-#import "GPUImageRawDataInput.h"
-#import "GPUImageFramebuffer.h"
-#import "LFGPUImageEmptyFilter.h"
 #import <ReplayKit/ReplayKit.h>
 
 @interface RKReplayKitCapture ()
-
-@property (nonatomic) BOOL appAudioReceived;
-
-@property (nonatomic) BOOL micAudioOnly;
-
-@property (nonatomic) NSUInteger startupVideoCount;
 
 @property (nonatomic) AudioStreamBasicDescription appAudioFormat;
 
@@ -30,31 +21,36 @@
 
 @property (strong, nonatomic) RKReplayKitGLContext *glContext;
 
-@property (strong, nonatomic) GPUImageRawDataInput *videoPipeInput;
+@property (nonatomic) CMTime lastVideoTime;
 
-@property (strong, nonatomic) GPUImageFilter *videoPipeOutput;
+@property (nonatomic) CMTime lastAppAudioTime;
+
+@property (strong, nonatomic) dispatch_queue_t slienceAudioQueue;
 
 @end
 
 @implementation RKReplayKitCapture
 
 + (AudioStreamBasicDescription)defaultAudioFormat {
-    AudioStreamBasicDescription format = {0};
-    format.mSampleRate = 44100;
-    format.mFormatID = kAudioFormatLinearPCM;
-    format.mFormatFlags = kAudioFormatFlagIsSignedInteger | kAudioFormatFlagsNativeEndian | kAudioFormatFlagIsPacked;
-    format.mChannelsPerFrame = 1;
-    format.mFramesPerPacket = 1;
-    format.mBitsPerChannel = 16;
-    format.mBytesPerFrame = format.mBitsPerChannel / 8 * format.mChannelsPerFrame;
-    format.mBytesPerPacket = format.mBytesPerFrame * format.mFramesPerPacket;
+    static AudioStreamBasicDescription format = {0};
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        format.mSampleRate = 44100;
+        format.mFormatID = kAudioFormatLinearPCM;
+        format.mFormatFlags = kAudioFormatFlagIsSignedInteger | kAudioFormatFlagsNativeEndian | kAudioFormatFlagIsPacked;
+        format.mChannelsPerFrame = 1;
+        format.mFramesPerPacket = 1;
+        format.mBitsPerChannel = 16;
+        format.mBytesPerFrame = format.mBitsPerChannel / 8 * format.mChannelsPerFrame;
+        format.mBytesPerPacket = format.mBytesPerFrame * format.mFramesPerPacket;
+    });
     return format;
 }
 
 - (instancetype)init {
     if (self = [super init]) {
         _micDataSrc = [[RKAudioDataMixSrc alloc] init];
-        _startupVideoCount = 0;
+        _slienceAudioQueue = dispatch_queue_create("livekit.replaykitcapture.sliencequeue", DISPATCH_QUEUE_SERIAL);
     }
     return self;
 }
@@ -64,25 +60,28 @@
         _videoConfiguration = [LFLiveVideoConfiguration defaultConfigurationFromSampleBuffer:sample];
         
         if (@available(iOS 11.1, *)) {
+            CGSize targetSize = CGSizeMake(720, 1280);
             CFNumberRef orientationAttachment = CMGetAttachment(sample, (__bridge CFStringRef)RPVideoSampleOrientationKey, NULL);
             CGImagePropertyOrientation orientation = [(__bridge NSNumber*)orientationAttachment intValue];
-            _videoConfiguration.videoSize = orientation <= kCGImagePropertyOrientationDownMirrored ? CGSizeMake(360, 640) : CGSizeMake(640, 360);
+            _videoConfiguration.videoSize = orientation <= kCGImagePropertyOrientationDownMirrored ? targetSize : CGSizeMake(targetSize.height, targetSize.width);
         }
         _glContext = [[RKReplayKitGLContext alloc] initWithCanvasSize:_videoConfiguration.videoSize];
     }
     
     [self processVideo:sample];
-    //[_delegate replayKitCapture:self didCaptureVideo:CMSampleBufferGetImageBuffer(sample)];
     
-    if (!_appAudioReceived && !_micAudioOnly) {
-        _startupVideoCount++;
-        if (_startupVideoCount > 30) {
-            _micAudioOnly = YES;
-        }
-    }
+    _lastVideoTime = CMSampleBufferGetPresentationTimeStamp(sample);
+    [self checkAudio];
 }
 
 - (void)processVideo:(CMSampleBufferRef)sample {
+    [self handleVideoOrientation:sample];
+    [_glContext processPixelBuffer:CMSampleBufferGetImageBuffer(sample)];
+    [_glContext render];
+    [_delegate replayKitCapture:self didCaptureVideo:_glContext.outputPixelBuffer];
+}
+
+- (void)handleVideoOrientation:(CMSampleBufferRef)sample {
     if (@available(iOS 11.1, *)) {
         CFNumberRef orientationAttachment = CMGetAttachment(sample, (__bridge CFStringRef)RPVideoSampleOrientationKey, NULL);
         CGImagePropertyOrientation orientation = [(__bridge NSNumber*)orientationAttachment intValue];
@@ -96,16 +95,11 @@
             [_glContext setRotation:0];
         }
     }
-    [_glContext processPixelBuffer:CMSampleBufferGetImageBuffer(sample)];
-    [_glContext render];
-    CVPixelBufferRef output = _glContext.outputPixelBuffer;
-    [_delegate replayKitCapture:self didCaptureVideo:output];
 }
 
 - (void)pushAppAudioSample:(CMSampleBufferRef)sample {
-    if (!_appAudioReceived) {
-        _appAudioReceived = YES;
-    }
+    _lastAppAudioTime = CMSampleBufferGetPresentationTimeStamp(sample);
+
     _appAudioFormat = *CMAudioFormatDescriptionGetStreamBasicDescription(CMSampleBufferGetFormatDescription(sample));
     
     if (!_audioConfiguration) {
@@ -114,6 +108,7 @@
     
     AudioBufferList audioBufferList;
     CMBlockBufferRef blockBuffer;
+    OSStatus status =
     CMSampleBufferGetAudioBufferListWithRetainedBlockBuffer(sample,
                                                             NULL,
                                                             &audioBufferList,
@@ -122,8 +117,15 @@
                                                             NULL,
                                                             0,
                                                             &blockBuffer);
+    if (status != noErr) {
+        NSLog(@"app audio sample error = %d", (int)status);
+        return;
+    }
     for (int i = 0; i < audioBufferList.mNumberBuffers; i++) {
         AudioBuffer audioBuffer = audioBufferList.mBuffers[i];
+        NSAssert(audioBuffer.mDataByteSize % 2 == 0, @"data size error");
+        NSAssert(audioBuffer.mData != NULL, @"data is null");
+        NSAssert(audioBuffer.mNumberChannels == 1, @"channel is not mono");
         [self convertAudioBufferToNativeEndian:audioBuffer fromFormat:_appAudioFormat];
         [self mixMicAudioToAudioBuffer:audioBuffer];
         NSData *data = [NSData dataWithBytes:audioBuffer.mData length:audioBuffer.mDataByteSize];
@@ -141,6 +143,7 @@
     
     AudioBufferList audioBufferList;
     CMBlockBufferRef blockBuffer;
+    OSStatus status =
     CMSampleBufferGetAudioBufferListWithRetainedBlockBuffer(sample,
                                                             NULL,
                                                             &audioBufferList,
@@ -149,17 +152,20 @@
                                                             NULL,
                                                             0,
                                                             &blockBuffer);
+    if (status != noErr) {
+        NSLog(@"mic audio sample error = %d", (int)status);
+        return;
+    }
     for (int i = 0; i < audioBufferList.mNumberBuffers; i++) {
         AudioBuffer audioBuffer = audioBufferList.mBuffers[i];
+        NSAssert(audioBuffer.mDataByteSize % 2 == 0, @"data size error");
+        NSAssert(audioBuffer.mData != NULL, @"data is null");
+        NSAssert(audioBuffer.mNumberChannels == 1, @"channel is not mono");
         [self convertAudioBufferToNativeEndian:audioBuffer fromFormat:_micAudioFormat];
         NSData *data = [NSData dataWithBytes:audioBuffer.mData length:audioBuffer.mDataByteSize];
         [_micDataSrc pushData:data];
     }
     CFRelease(blockBuffer);
-    
-    if (_micAudioOnly) {
-        [_delegate replayKitCapture:self didCaptureAudio:[_micDataSrc popData]];
-    }
 }
 
 - (void)mixMicAudioToAudioBuffer:(AudioBuffer)audioBuffer {
@@ -173,12 +179,33 @@
     }
 }
 
-- (void)startSlienceAudio {
-    
+- (void)checkAudio {
+    if (CMTIME_IS_INVALID(_lastAppAudioTime)) {
+        _lastAppAudioTime = _lastVideoTime;
+        return;
+    }
+    CMTime diff = CMTimeSubtract(_lastVideoTime, _lastAppAudioTime);
+    Float64 interval = CMTimeGetSeconds(diff);
+
+    if (interval >= 1) {
+        _lastAppAudioTime = _lastVideoTime;
+        dispatch_async(_slienceAudioQueue, ^{
+            [self sendSlience];
+        });
+    }
 }
 
-- (void)stopSlienceAudio {
-    
+- (void)sendSlience {
+    AudioStreamBasicDescription audioFormat = [self.class defaultAudioFormat];
+    if (!_audioConfiguration) {
+        _audioConfiguration = [LFLiveAudioConfiguration defaultConfigurationFromFormat:audioFormat];
+    }
+    NSUInteger size = audioFormat.mSampleRate * audioFormat.mBytesPerFrame;   // 0.5 sec
+    char *bytes = (char *)malloc(size);
+    memset(bytes, 0, size);
+    [_micDataSrc readBytes:bytes length:size];
+    NSData *data = [NSData dataWithBytesNoCopy:bytes length:size freeWhenDone:YES];
+    [_delegate replayKitCapture:self didCaptureAudio:data];
 }
 
 - (void)convertAudioBufferToNativeEndian:(AudioBuffer)buffer fromFormat:(AudioStreamBasicDescription)format {

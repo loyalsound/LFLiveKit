@@ -42,6 +42,8 @@
 
 - (SInt16)nextFrame;
 
+- (void)readBytes:(void *)dst length:(NSUInteger)length;
+
 @end
 
 
