@@ -37,6 +37,10 @@
 #import "RKGPUImagePinkyFilter.h"
 #import "RKGPUImageAdventureFilter.h"
 
+#import "RKGPUImageBeautyFilter.h"
+#import "RKGPUImageBeautyFilter2.h"
+#import "RKGPUImageBeautyFilter3.h"
+
 #if __has_include(<GPUImage/GPUImage.h>)
 #import <GPUImage/GPUImage.h>
 #elif __has_include("GPUImage/GPUImage.h")
@@ -54,7 +58,6 @@ static NSString * const kColorFilterOverlayKey = @"overlay";
 @interface LFVideoCapture ()
 
 @property (nonatomic, strong) GPUImageVideoCamera *videoCamera;
-@property (nonatomic, strong) LFGPUImageBeautyFilter *beautyFilter;
 @property (nonatomic, strong) GPUImageOutput<GPUImageInput> *filter;
 @property (nonatomic, strong) GPUImageCropFilter *cropfilter;
 @property (nonatomic, strong) GPUImageOutput<GPUImageInput> *output;
@@ -72,6 +75,8 @@ static NSString * const kColorFilterOverlayKey = @"overlay";
 @property (nonatomic, copy, readonly) NSArray<RKGPUImageColorFilter *> *colorFilters;
 
 @property (nonatomic, strong) RKGPUImageColorFilter *colorFilter;
+
+@property (nonatomic, strong) GPUImageFilter *beautyFilter;
 
 @end
 
@@ -267,10 +272,18 @@ static NSString * const kColorFilterOverlayKey = @"overlay";
     [self reloadFilter];
 }
 
+- (void)setBeautyMode:(int)beautyMode {
+    if (_beautyMode == beautyMode) {
+        return;
+    }
+    _beautyMode = beautyMode;
+    [self reloadFilter];
+}
+
 - (void)setBeautyLevel:(CGFloat)beautyLevel {
     _beautyLevel = beautyLevel;
     if (self.beautyFilter) {
-        [self.beautyFilter setBeautyLevel:_beautyLevel];
+//        [self.beautyFilter setBeautyLevel:_beautyLevel];
     }
 }
 
@@ -281,7 +294,7 @@ static NSString * const kColorFilterOverlayKey = @"overlay";
 - (void)setBrightLevel:(CGFloat)brightLevel {
     _brightLevel = brightLevel;
     if (self.beautyFilter) {
-        [self.beautyFilter setBrightLevel:brightLevel];
+//        [self.beautyFilter setBrightLevel:brightLevel];
     }
 }
 
@@ -396,7 +409,9 @@ static NSString * const kColorFilterOverlayKey = @"overlay";
 
     // 美肌
     if (self.beautyFace) {
-        self.beautyFilter = [[LFGPUImageBeautyFilter alloc] init];
+        self.beautyFilter = _beautyMode == 0 ? [[LFGPUImageBeautyFilter alloc] init] :
+        _beautyMode == 1 ? [[RKGPUImageBeautyFilter alloc] init] :
+        _beautyMode == 2 ? [[RKGPUImageBeautyFilter2 alloc] init] : [[RKGPUImageBeautyFilter3 alloc] init];
         
         [(GPUImageFilterGroup *)self.filter setInitialFilters:@[self.beautyFilter]];
         [(GPUImageFilterGroup *)self.filter addFilter:self.beautyFilter];
